@@ -17,14 +17,14 @@ export const SideBar = ({ drawerWidth = 240 }) => {
         >
             <Toolbar>
                 <Typography variant='h6' noWrap component='div'>
-                    Fernando Herrera
+                    Jonathan Munoz
                 </Typography>
             </Toolbar>
             <Divider />
 
             <List>
                 {
-                    ['Enero','Febrero','Marzo','Abril'].map( text => (
+                    ['Enero','Febrero','Marzo','Abril', 'Mayo', 'Junio', 'Julio'].map( text => (
                         <ListItem key={ text } disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
