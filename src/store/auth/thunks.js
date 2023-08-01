@@ -1,3 +1,4 @@
+import { doc, setDoc } from 'firebase/firestore/lite';
 import {
   loginWithEmailPassword,
   logoutFirebase,
@@ -5,6 +6,8 @@ import {
   signInWithGoogle,
 } from '../../firebase/providers';
 import { checkingCredentials, login, logout } from './';
+import { FirebaseDB } from '../../firebase/config';
+import { setSaving, updateNote } from '../journal';
 
 export const checkingAuthentication = (email, password) => {
   return async (dispatch) => {
@@ -65,3 +68,21 @@ export const startLogout = () => {
     dispatch(logout());
   };
 };
+
+export const startSaveNote = () => {
+  return async(dispatch, getState) => {
+
+    dispatch(setSaving());
+
+    const {uid} = getState().auth;
+    const {active: note} = getState().journal;
+
+    const noteToFirestore = {...note};
+    delete noteToFirestore.id;
+
+    const docRef = doc( FirebaseDB, `${uid}/journal/notes/${note.id}`);
+    await setDoc(docRef, noteToFirestore, { merge: true} );
+
+    dispatch(updateNote(note));
+  }
+}
