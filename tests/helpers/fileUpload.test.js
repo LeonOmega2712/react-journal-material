@@ -28,7 +28,7 @@ describe('Pruebas en fileUpload', () => {
       [`journal-app/${imageId}`],
       { resource_type: 'image' }
     );
-    console.log({ cloudResp });
+    // console.log({ cloudResp });
   });
 
   test('debe de retornar null', async () => {
